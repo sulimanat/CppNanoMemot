@@ -31,8 +31,11 @@ public:
     //// STUDENT CODE
     ////
     ChatBot(const ChatBot &source){
-        std::cout << "COPY content"  << std::endl;
-
+        std::cout << "ChatBot copy Constructor"  << std::endl;
+	
+    if(_image != NULL)
+    delete _image;
+    
     _image=source._image; // avatar image
 
     _currentNode=source._currentNode;
@@ -42,10 +45,13 @@ public:
     };
     
     ChatBot &operator=(const ChatBot &source){
-    std::cout << "COPY = content"  << std::endl;
+    std::cout << "ChatBot copy assignment operator"  << std::endl;
         if (this == &source)
             return *this;
-
+		
+        if(_image != NULL)
+  		  delete _image;
+          
          _image = new wxBitmap();
         _image = source._image;
          _currentNode=source._currentNode;
@@ -56,7 +62,7 @@ public:
     
     ChatBot(ChatBot &&source)noexcept  {
     
-     
+  _image = new wxBitmap();
   this->_image = source._image;
   source._image = nullptr;
   this->_currentNode = source._currentNode;
@@ -65,7 +71,7 @@ public:
   source._rootNode = nullptr;
   this->_chatLogic = source._chatLogic;
   source._chatLogic = nullptr;
-    std::cout << "MOVING content "<< std::endl;
+    std::cout << "chatBot Move Constructor "<< std::endl;
 
     }
     
@@ -75,7 +81,10 @@ public:
      	 if (this == &source)
             return *this;
         
-  
+  if(_image != NULL)
+    delete _image;
+    
+    _image = new wxBitmap();  
   this->_image = source._image;
   source._image = NULL;
   this->_currentNode = source._currentNode;
@@ -84,7 +93,7 @@ public:
   source._rootNode = nullptr;
   _chatLogic = source._chatLogic;
   source._chatLogic = nullptr;
-      std::cout << "MOVING (sign) " << std::endl;
+      std::cout << "ChatBot Move assignment operator " << std::endl;
   return *this;
     
 
