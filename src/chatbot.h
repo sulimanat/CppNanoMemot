@@ -30,74 +30,13 @@ public:
 
     //// STUDENT CODE
     ////
-    ChatBot(const ChatBot &source){
-        std::cout << "ChatBot copy Constructor"  << std::endl;
-	
-    if(_image != NULL)
-    delete _image;
+    ChatBot(const ChatBot &source);
     
-    _image=source._image; // avatar image
-
-    _currentNode=source._currentNode;
-    _rootNode=source._rootNode;
-    _chatLogic=source._chatLogic;
+    ChatBot &operator=(const ChatBot &source);
     
-    };
+    ChatBot(ChatBot &&source);
     
-    ChatBot &operator=(const ChatBot &source){
-    std::cout << "ChatBot copy assignment operator"  << std::endl;
-        if (this == &source)
-            return *this;
-		
-        if(_image != NULL)
-  		  delete _image;
-          
-         _image = new wxBitmap();
-        _image = source._image;
-         _currentNode=source._currentNode;
-    	_rootNode=source._rootNode;
-    	_chatLogic=source._chatLogic;
-        return *this;
-    }
-    
-    ChatBot(ChatBot &&source)noexcept  {
-    
-  _image = new wxBitmap();
-  this->_image = source._image;
-  source._image = nullptr;
-  this->_currentNode = source._currentNode;
-  source._currentNode = nullptr;
-  this->_rootNode = source._rootNode;
-  source._rootNode = nullptr;
-  this->_chatLogic = source._chatLogic;
-  source._chatLogic = nullptr;
-    std::cout << "chatBot Move Constructor "<< std::endl;
-
-    }
-    
-    ChatBot &operator=(ChatBot &&source)noexcept {
-    
-     
-     	 if (this == &source)
-            return *this;
-        
-  if(_image != NULL)
-    delete _image;
-    
-    _image = new wxBitmap();  
-  this->_image = source._image;
-  source._image = NULL;
-  this->_currentNode = source._currentNode;
-  source._currentNode = nullptr;
-  this->_rootNode = source._rootNode;
-  source._rootNode = nullptr;
-  _chatLogic = source._chatLogic;
-  source._chatLogic = nullptr;
-      std::cout << "ChatBot Move assignment operator " << std::endl;
-  return *this;
-    
-
-    }
+    ChatBot &operator=(ChatBot &&source);
     ////
     //// EOF STUDENT CODE
 
